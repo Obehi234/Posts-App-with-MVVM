@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Week9- MVVM Quotes</string>
+    <string name="test_post_body">Test Post Body</string>
+    <string name="test_post_title">Test Post Title</string>
+    <string name="commenter_s_email">Commenter\'s Email</string>
+    <string name="comment_body">Comment Body</string>
+    <string name="Commenter_name">Commenter\'s name</string>
+    <string name="fab_description">floating action button to add comments</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
