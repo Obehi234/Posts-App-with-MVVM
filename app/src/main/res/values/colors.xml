@@ -12,4 +12,5 @@
     <color name="icon_darkBlue">#293241</color>
     <color name="icon_pink">#F2BAC9</color>
     <color name="icon_tan">#F2E2BA</color>
+    <color name="overlay">#afa7a7</color>
 </resources>

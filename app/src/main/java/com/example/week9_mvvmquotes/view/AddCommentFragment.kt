@@ -1,5 +1,6 @@
 package com.example.week9_mvvmquotes.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -35,6 +36,7 @@ class AddCommentFragment : Fragment() {
     }
 
     private fun addComment() {
+        val data = Intent()
         val commentText = editTextComment.text.toString()
         if (commentText.isNotEmpty()) {
             Log.d("CHECK_ADD_TO_DATABASE", "$commentText")

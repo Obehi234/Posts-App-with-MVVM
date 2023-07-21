@@ -16,6 +16,7 @@ import com.example.week9_mvvmquotes.R
 import com.example.week9_mvvmquotes.databinding.ActivityCommentsBinding
 import com.example.week9_mvvmquotes.model.CommentsItem
 import com.example.week9_mvvmquotes.viewmodel.PostViewModel
+import kotlinx.coroutines.NonCancellable.start
 
 class CommentsActivity : AppCompatActivity() {
     private lateinit var postViewModel: PostViewModel
@@ -24,6 +25,7 @@ class CommentsActivity : AppCompatActivity() {
     private val commentsAdapter by lazy { CommentsAdapter() }
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var fragmentContainer: FrameLayout
+    private lateinit var overlay: View
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +44,7 @@ class CommentsActivity : AppCompatActivity() {
                 setUpCommentsRecyclerView(comments)
             })
         }
+        overlay = binding.overlayView
         fragmentContainer = binding.fragmentContainer
         setUpFAButton()
     }
@@ -53,9 +56,7 @@ class CommentsActivity : AppCompatActivity() {
             adapter = commentsAdapter
         }
         commentsAdapter.submitList(comments)
-
     }
-
     private fun setUpFAButton() {
         binding.fabAddComment.setOnClickListener {
             showAddCommentFragment()
@@ -66,6 +67,13 @@ class CommentsActivity : AppCompatActivity() {
         if (fragmentContainer.visibility == View.VISIBLE) {
             return
         }
+        overlay.visibility = View.VISIBLE
+        overlay.alpha = 0f
+        overlay.animate()
+            .alpha(1f)
+            .setDuration(500)
+            .start()
+
         val fragmentManager: FragmentManager = supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         val fragment_comment: Fragment = AddCommentFragment()
@@ -79,6 +87,14 @@ class CommentsActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         if (fragmentContainer.visibility == View.VISIBLE) {
+            overlay.animate()
+                .alpha(0f)
+                .setDuration(500)
+                .withEndAction{
+                    overlay.visibility = View.GONE
+                }
+                .start()
+
             fragmentContainer.visibility = View.GONE
         }
         super.onBackPressed()
