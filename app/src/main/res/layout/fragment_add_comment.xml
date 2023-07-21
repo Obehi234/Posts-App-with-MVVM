@@ -51,7 +51,7 @@
                 android:gravity="top"
                 android:hint="@string/write_your_comment_here"
                 android:inputType="textMultiLine"
-                android:textColor="@android:color/white"
+                android:textColor="@color/jet"
                 android:textCursorDrawable="@drawable/note_text_cursor_color"
                 android:textSize="16sp"
                 tools:ignore="SpeakableTextPresentCheck" />

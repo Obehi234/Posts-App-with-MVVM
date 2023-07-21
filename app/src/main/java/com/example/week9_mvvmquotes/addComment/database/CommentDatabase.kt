@@ -1,6 +1,7 @@
 package com.example.week9_mvvmquotes.addComment.database
 
 import android.content.Context
+import androidx.lifecycle.ViewModelProvider.NewInstanceFactory.Companion.instance
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -10,6 +11,7 @@ abstract class CommentsDatabase : RoomDatabase() {
     abstract fun commentDao(): CommentDao
 
     companion object {
+        @Volatile
         private var INSTANCE: CommentsDatabase? = null
 
         fun getDatabase(context: Context): CommentsDatabase {
@@ -18,7 +20,8 @@ abstract class CommentsDatabase : RoomDatabase() {
                     context.applicationContext,
                     CommentsDatabase::class.java,
                     "comment_database"
-                ).build()
+                ).fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 instance
             }
