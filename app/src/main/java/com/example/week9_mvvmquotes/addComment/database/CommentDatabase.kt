@@ -1,12 +1,11 @@
 package com.example.week9_mvvmquotes.addComment.database
 
 import android.content.Context
-import androidx.lifecycle.ViewModelProvider.NewInstanceFactory.Companion.instance
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Comment::class], version = 1, exportSchema = false)
+@Database(entities = [CommentsItem::class], version = 1, exportSchema = false)
 abstract class CommentsDatabase : RoomDatabase() {
     abstract fun commentDao(): CommentDao
 

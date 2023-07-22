@@ -1,21 +1,13 @@
 package com.example.week9_mvvmquotes
 
-import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
-import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.week9_mvvmquotes.addComment.database.CommentsItem
 import com.example.week9_mvvmquotes.databinding.CommentRowItemBinding
-import com.example.week9_mvvmquotes.model.CommentsItem
 
 class CommentsAdapter :
     ListAdapter<CommentsItem, CommentsAdapter.CommentViewHolder>(CommentDiffUtilCallback()) {

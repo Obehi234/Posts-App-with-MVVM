@@ -1,8 +1,7 @@
 package com.example.week9_mvvmquotes.model.api
 
-import com.example.week9_mvvmquotes.model.CommentsItem
+import com.example.week9_mvvmquotes.addComment.database.CommentsItem
 import com.example.week9_mvvmquotes.model.PostListItem
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 

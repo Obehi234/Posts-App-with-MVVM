@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "comments")
-data class Comment(
+data class CommentsItem(
    @PrimaryKey(autoGenerate = true)
    val id: Int = 0 ,
    val postId: Int,

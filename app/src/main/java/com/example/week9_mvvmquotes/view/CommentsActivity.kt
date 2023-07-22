@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -13,19 +14,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.week9_mvvmquotes.CommentsAdapter
 import com.example.week9_mvvmquotes.R
+import com.example.week9_mvvmquotes.addComment.database.CommentsItem
+import com.example.week9_mvvmquotes.addComment.database.CommentsViewModel
 import com.example.week9_mvvmquotes.databinding.ActivityCommentsBinding
-import com.example.week9_mvvmquotes.model.CommentsItem
 import com.example.week9_mvvmquotes.viewmodel.PostViewModel
-import kotlinx.coroutines.NonCancellable.start
 
 class CommentsActivity : AppCompatActivity() {
-    private lateinit var postViewModel: PostViewModel
+    private lateinit var commentViewModel: CommentsViewModel
     private var _binding: ActivityCommentsBinding? = null
     private val binding get() = _binding!!
     private val commentsAdapter by lazy { CommentsAdapter() }
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var fragmentContainer: FrameLayout
     private lateinit var overlay: View
+    private lateinit var prgBar: ProgressBar
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,22 +36,24 @@ class CommentsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.title = "Comments"
-
         linearLayoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        postViewModel = ViewModelProvider(this).get(PostViewModel::class.java)
+        commentViewModel = ViewModelProvider(this).get(CommentsViewModel::class.java)
+        commentViewModel.initializeDatabase(this)
 
         val postId = intent.getIntExtra("postId", -1)
         if (postId != -1) {
-            postViewModel.fetchCommentsForPost(postId).observe(this, Observer { comments ->
+            commentViewModel.fetchCommentsForPost(postId).observe(this, Observer { comments ->
                 setUpCommentsRecyclerView(comments)
             })
         }
+        prgBar = binding.progressHome
         overlay = binding.overlayView
         fragmentContainer = binding.fragmentContainer
         setUpFAButton()
     }
 
     private fun setUpCommentsRecyclerView(comments: List<CommentsItem>?) {
+       prgBar.visibility = View.GONE
         binding.commentsRecycler.apply {
             setHasFixedSize(true)
             layoutManager = linearLayoutManager
