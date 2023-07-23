@@ -29,7 +29,7 @@ class CommentsViewModel: ViewModel() {
                         Log.d("CHECK_RESPONSE_COMMENTS", "${comments.size} - $postId")
                     }
                 } catch (e: Exception) {
-                    Log.d("CHECK_RESPONSE_COMMENTS_FAILED", "${e.printStackTrace()}")
+                    Log.d("CHECK_RESPONSE_COMMENTS_FAILED", "${e.message}")
                 }
             }
         }

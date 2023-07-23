@@ -31,22 +31,13 @@ class PostViewModel : ViewModel() {
             try {
                 val posts = repository.getPosts()
                 _post.value = posts
+
                 Log.d("CHECK_RESPONSE_POST", "${posts.size}")
             } catch (e: Exception) {
-                Log.d("CHECK_RESPONSE_POST", "${e.printStackTrace()}")
+                Log.d("CHECK_RESPONSE_POST", "${e.message}")
             }
         }
     }
 }
 
-
-
-    //fun addComment(newComment: CommentsItem) {
-    //    val currentComments = _commentsLiveData.value.orEmpty().toMutableList()
-    //    currentComments.add(newComment)
-    //    _commentsLiveData.postValue(currentComments)
-
-     //   viewModelScope.launch(Dispatchers.IO) { repository.saveCommentsToDatabase(listOf(newComment))  }
-   // }
-//}
 

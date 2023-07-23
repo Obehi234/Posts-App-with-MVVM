@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "comments")
 data class CommentsItem(
    @PrimaryKey(autoGenerate = true)
-   val id: Int = 0 ,
+   val id: Int,
    val postId: Int,
    val name: String,
    val email: String,

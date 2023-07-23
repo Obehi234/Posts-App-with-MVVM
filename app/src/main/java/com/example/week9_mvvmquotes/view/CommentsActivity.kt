@@ -28,6 +28,7 @@ class CommentsActivity : AppCompatActivity() {
     private lateinit var fragmentContainer: FrameLayout
     private lateinit var overlay: View
     private lateinit var prgBar: ProgressBar
+    private var postId: Int = -1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +41,7 @@ class CommentsActivity : AppCompatActivity() {
         commentViewModel = ViewModelProvider(this).get(CommentsViewModel::class.java)
         commentViewModel.initializeDatabase(this)
 
-        val postId = intent.getIntExtra("postId", -1)
+        postId = intent.getIntExtra("postId", -1)
         if (postId != -1) {
             commentViewModel.fetchCommentsForPost(postId).observe(this, Observer { comments ->
                 setUpCommentsRecyclerView(comments)
@@ -80,7 +81,7 @@ class CommentsActivity : AppCompatActivity() {
 
         val fragmentManager: FragmentManager = supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-        val fragment_comment: Fragment = AddCommentFragment()
+        val fragment_comment: Fragment = AddCommentFragment.newInstance(postId)
         fragmentTransaction.replace(R.id.fragmentContainer, fragment_comment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
